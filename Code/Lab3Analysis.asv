@@ -65,7 +65,6 @@ a = polyval(slope_p1,water_pasc);
 plot(water_pasc,a)
 xlim([3,6]);
 ylim([0,1650])
-legend("Raw Data","Line Of Best Fit.")
 
 %% taking in data part 2
 
@@ -138,10 +137,10 @@ y = polyval(P_pitot,distance);
 %% ploting q vs dist 
 figure(2)
 scatter(distance,pitot_press)
-
+legend("Raw Data")
 hold on 
 plot(distance,y)
-legend("Raw Data","Line Of Best Fit.")
+legend("Line")
 hold off
 
 xlabel("Distance (cm)", "FontSize",12)
@@ -164,13 +163,12 @@ hold on
 xlabel("Distance (cm)", "FontSize",12)
 ylabel("velocity (m/s)", "FontSize",12)
 title("Velocity vs Distance","FontSize",14)
-
 grid on
 slope_velo = polyfit(distance,velo,12);
 y1 = polyval(slope_velo,distance);
 
 plot(distance,y1)
-legend("Raw Data","Line Of Best Fit.")
+
 
 
 
