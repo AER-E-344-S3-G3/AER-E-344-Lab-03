@@ -60,7 +60,11 @@ xlabel("Voltage", "FontSize",12)
 ylabel("Pressure (Pa)", "FontSize",12)
 title("Pressure vs Voltage","FontSize",14)
 grid on
-
+hold on
+a = polyval(slope_p1,water_pasc);
+plot(water_pasc,a)
+xlim([3,6]);
+ylim([0,1650])
 %% taking in data part 2
 
 data0cm = readtable('p2_0.txt.xlsx');
