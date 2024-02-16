@@ -2,7 +2,9 @@
 % Section 3 Group 3
 clear, clc, close all;
 
+figure_dir = "../Figures/";
 u = symunit;
+rho_air = 1.225; % [kg/m^3]
 
 %% Import Calibration Data
 pStrings = ["0" "0.51" "1.04" "1.56" "2.02" "3.16" "3.59" "4.10" ...
@@ -20,28 +22,54 @@ end
 
 V_0 = V(1); % [V]
 
-fprintf("V_0 = %g V (zero pressure voltage)\n", V_0);
+%% Import Wind Tunnel Data
+L = 0 : 16; % [cm]
+V_q = zeros(1, length(L)); % [inH_2O]
 
-%% Import Dynamic Pressure Data
-l = 0 : 16; % [cm]
-q = zeros(1, length(l)); % [inH_2O]
-
-for i = 1 : length(l)
-    dataFile = fopen("p2_" + string(l(i)) + ".txt", "r");
+for i = 1 : length(L)
+    dataFile = fopen("p2_" + string(L(i)) + ".txt", "r");
     dataFormat = "%*s %*s %f";
-    q(i) = mean( ...
+    V_q(i) = mean( ...
         cell2mat(textscan(dataFile, dataFormat, "HeaderLines", 5)));
     fclose(dataFile);
 end
+
+V_q_0 = V_q(1);
 
 %% Calculate Calibration Coefficient
 C_regress = polyfit(V - V_0, p, 1);
 C = C_regress(1); % [inH_2O/V]
 C = double(separateUnits(unitConvert(C * u.inH2O, u.Pa))); % [Pa/V]
-fprintf("C = %g Pa/V (calibration constant)\n", C);
-fprintf("Setra electronic manometer calibration curve:\n\tP = %g(V - V_0) [Pa]\n", C);
 
-%% Plot Graphs
+fprintf("Calibration Values:\n");
+fprintf("V_0 = %g V (zero pressure voltage)\n", V_0);
+fprintf("C = %g Pa/V (calibration constant)\n\n", C);
+fprintf("Setra electronic manometer calibration curve:\n");
+fprintf("\tP = %g(V - V_0) [Pa]\n\n", C);
+
+%% Calculate Dynamic Pressure and Velocity
+q_tunnel = C .* (V_q - V_q_0); % [Pa]
+v_tunnel = sqrt(2 .* q_tunnel / rho_air); % [m/s]
+
+%% Calculate Line of Best Fit for Dynamic Pressure Graph
+q_regress_1 = polyfit(L(1:3), q_tunnel(1:3), 2);
+q_regress_2 = polyfit(L(2:end), q_tunnel(2:end), 3);
+
+fprintf("Wind Tunnel Mapping:\n");
+fprintf("V_0 = %g V (zero pressure voltage)\n\n", V_q_0);
+fprintf("q = %gL^2 + %gL + %g [Pa] for 0 <= L < 1\n", q_regress_1);
+fprintf("q = %gL^3 + %gL^2 + %gL + %g [Pa] for 1 <= L < 16\n\n", ...
+    q_regress_2);
+
+%% Calculate Line of Best Fit for Velocity Graph
+v_regress_1 = polyfit(L(1:3), v_tunnel(1:3), 2);
+v_regress_2 = polyfit(L(2:end), v_tunnel(2:end), 3);
+
+fprintf("v = %gL^2 + %gL + %g [m/s] for 0 <= L < 1\n", v_regress_1);
+fprintf("v = %gL^3 + %gL^2 + %gL + %g [m/s] for 1 <= L < 16\n", ...
+    v_regress_2);
+
+%% Display Data
 V_x = 0 : 0.01 : (V(end) - V_0) * 1.15;
 
 figure(1);
@@ -54,86 +82,45 @@ plot(V_x, polyval(C_regress, V_x));
 hold off;
 xlim([V(1) - V_0, V(end) - V_0]);
 uistack(h, "top");
-legend("Experimental Data", "Line of Best Fit", "Location", "northwest");
+legend("Line of Best Fit", "Experimental Data", "Location", "northwest");
 grid on;
+saveas(gcf, figure_dir ...
+    + "Pressure vs Voltage from Electronic Manometer.svg");
 
-% %% taking final data to plot putting in array to plot 
-% 
-% water_pash1 = [0;0.51;1.04;1.56;2.02;3.16;3.59;4.10;4.66;5.12]*248.84;
-% water_pasc  = water_pash1;
-% 
-% data_average =[data_0_average;data_051_average;data_104_average;data_156_average;data_202_average;data_316_average;data_359_average;data_410_average;data_466_average;data_512_average];
-% 
-% %% poly fit 
-% 
-% slope_p1 = polyfit(data_average,water_pasc,1);
-% 
-% disp("the calibration coef is 622.6634 Pa/volt");
-% 
-% %% ploting part 1 water pas to volt
-% 
-% scatter(data_average,water_pasc)
-% xlabel("Voltage", "FontSize",12)
-% ylabel("Pressure (Pa)", "FontSize",12)
-% title("Pressure vs Voltage","FontSize",14)
-% grid on
-% hold on
-% a = polyval(slope_p1,water_pasc);
-% plot(water_pasc,a)
-% xlim([3,6]);
-% ylim([0,1650])
-% legend("Raw Data","Line Of Best Fit.")
-% 
-% 
-% %% taking final data to plot putting in array to plot
-% 
-% meandata = [data_0cm_average;data_1cm_average;data_2cm_average;data_3cm_average;data_4cm_average;data_5cm_average;data_6cm_average;data_7cm_average;data_8cm_average;data_9cm_average;data_10cm_average;data_11cm_average;data_12cm_average;data_13cm_average;data_14cm_average;data_15cm_average];
-% 
-% pitot_press = polyval(slope_p1,meandata);
-% 
-% distance = (0:1:15)*0.01;
-% 
-% P_pitot = polyfit(distance,pitot_press,3);
-% y = polyval(P_pitot,distance);
-% 
-% %% ploting q vs dist 
-% figure(2)
-% scatter(distance,pitot_press)
-% 
-% hold on 
-% plot(distance,y)
-% legend("Raw Data","Line Of Best Fit.")
-% hold off
-% 
-% xlabel("Distance (cm)", "FontSize",12)
-% ylabel("Dynamic pressure (Pa)", "FontSize",12)
-% title("Dynamic Pressure vs Distance","FontSize",14)
-% grid on
-% 
-% 
-% %% calc velocity
-% 
-% rho = 1.225;
-% 
-% velo = sqrt(2*(y)/rho);
-% velo2 = sqrt(2*(pitot_press)./(rho));
-% %% plot velo vs dist
-% figure(3)
-% 
-% scatter(distance,velo2)
-% hold on
-% xlabel("Distance (cm)", "FontSize",12)
-% ylabel("velocity (m/s)", "FontSize",12)
-% title("Velocity vs Distance","FontSize",14)
-% 
-% grid on
-% slope_velo = polyfit(distance,velo,12);
-% y1 = polyval(slope_velo,distance);
-% 
-% plot(distance,y1)
-% legend("Raw Data","Line Of Best Fit.")
-% 
-% 
-% 
-% 
-% 
+q_x_1 = L(1) : 0.01 : L(2);
+q_x_2 = L(2) : 0.01 : L(end);
+
+figure(2);
+h = scatter(L, q_tunnel, 50, "filled");
+title("Dynamic Pressure vs. Distance from the Test Chamber Wall");
+xlabel("L [cm]");
+ylabel("q [Pa]");
+hold on;
+plot(q_x_1, polyval(q_regress_1, q_x_1), "r");
+plot(q_x_2, polyval(q_regress_2, q_x_2), "r");
+hold off;
+uistack(h, "top")
+legend("", "Line of Best Fit", "Experimental Data", ...
+    "Location", "southeast");
+grid on;
+saveas(gcf, figure_dir ...
+    + "Dynamic Pressure vs. Distance from the Test Chamber Wall.svg");
+
+v_x_1 = L(1) : 0.01 : L(2);
+v_x_2 = L(2) : 0.01 : L(end);
+
+figure(3);
+h = scatter(L, v_tunnel, 50, "filled");
+title("Velocity vs. Distance from the Test Chamber Wall");
+xlabel("L [cm]");
+ylabel("v [m/s]");
+hold on;
+plot(v_x_1, polyval(v_regress_1, v_x_1), "r");
+plot(v_x_2, polyval(v_regress_2, v_x_2), "r");
+hold off;
+uistack(h, "top")
+legend("", "Line of Best Fit", "Experimental Data", ...
+    "Location", "southeast");
+grid on;
+saveas(gcf, figure_dir ...
+    + "Velocity vs. Distance from the Test Chamber Wall.svg");
