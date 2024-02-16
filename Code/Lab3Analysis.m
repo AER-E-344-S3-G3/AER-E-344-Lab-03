@@ -2,10 +2,12 @@
 % Section 3 Group 3
 clear, clc, close all;
 
+u = symunit;
+
 %% Import Calibration Data
 pStrings = ["0" "0.51" "1.04" "1.56" "2.02" "3.16" "3.59" "4.10" ...
-    "4.66" "5.12"]; % [inH_20]
-p = str2double(pStrings); % [inH_20]
+    "4.66" "5.12"]; % [inH_2O]
+p = str2double(pStrings); % [inH_2O]
 V = zeros(1, length(p)); % [V]
 
 for i = 1 : length(p)
@@ -18,9 +20,11 @@ end
 
 V_0 = V(1); % [V]
 
+fprintf("V_0 = %g V (zero pressure voltage)\n", V_0);
+
 %% Import Dynamic Pressure Data
 l = 0 : 16; % [cm]
-q = zeros(1, length(l)); % [inH_20]
+q = zeros(1, length(l)); % [inH_2O]
 
 for i = 1 : length(l)
     dataFile = fopen("p2_" + string(l(i)) + ".txt", "r");
@@ -29,6 +33,29 @@ for i = 1 : length(l)
         cell2mat(textscan(dataFile, dataFormat, "HeaderLines", 5)));
     fclose(dataFile);
 end
+
+%% Calculate Calibration Coefficient
+C_regress = polyfit(V - V_0, p, 1);
+C = C_regress(1); % [inH_2O/V]
+C = double(separateUnits(unitConvert(C * u.inH2O, u.Pa))); % [Pa/V]
+fprintf("C = %g Pa/V (calibration constant)\n", C);
+fprintf("Setra electronic manometer calibration curve:\n\tP = %g(V - V_0) [Pa]\n", C);
+
+%% Plot Graphs
+V_x = 0 : 0.01 : (V(end) - V_0) * 1.15;
+
+figure(1);
+h = scatter(V - V_0, p, 50, "filled");
+title("Pressure vs. Voltage from Electronic Manometer");
+xlabel("V - V_0 [V]");
+ylabel("P [Pa]");
+hold on;
+plot(V_x, polyval(C_regress, V_x));
+hold off;
+xlim([V(1) - V_0, V(end) - V_0]);
+uistack(h, "top");
+legend("Experimental Data", "Line of Best Fit", "Location", "northwest");
+grid on;
 
 % %% taking final data to plot putting in array to plot 
 % 
