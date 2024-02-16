@@ -42,8 +42,8 @@ data_512_average = mean(data_512);
 
 %% taking final data to plot putting in array to plot 
 
-water_inch = [0;0.51;1.04;1.56;2.02;3.16;3.59;4.10;4.66;5.12];
-water_pasc = 248.84 * water_inch;
+water_pash1 = [0;0.51;1.04;1.56;2.02;3.16;3.59;4.10;4.66;5.12]*248.84;
+water_pasc  = water_pash1;
 
 data_average =[data_0_average;data_051_average;data_104_average;data_156_average;data_202_average;data_316_average;data_359_average;data_410_average;data_466_average;data_512_average];
 
@@ -121,16 +121,16 @@ data_15cm_average = mean(data_15cm);
 
 meandata = [data_0cm_average;data_1cm_average;data_2cm_average;data_3cm_average;data_4cm_average;data_5cm_average;data_6cm_average;data_7cm_average;data_8cm_average;data_9cm_average;data_10cm_average;data_11cm_average;data_12cm_average;data_13cm_average;data_14cm_average;data_15cm_average];
 
-dynamicpressure = meandata*slope_p1(1); 
+pitot_press = polyval(slope_p1,meandata);
 
-distance = 0:1:15;
+distance = (0:1:15)*0.01;
 
-slope_p2 = polyfit(distance,dynamicpressure,12);
-y = polyval(slope_p2,distance);
+P_pitot = polyfit(distance,pitot_press,3);
+y = polyval(P_pitot,distance);
 
 %% ploting q vs dist 
 figure(2)
-scatter(distance,dynamicpressure)
+scatter(distance,pitot_press)
 hold on 
 plot(distance,y)
 hold off
@@ -144,12 +144,12 @@ grid on
 
 rho = 1.225;
 
-velo = sqrt(2*(dynamicpressure)/rho);
-
+velo = sqrt(2*(y)/rho);
+velo2 = sqrt(2*(pitot_press)./(rho));
 %% plot velo vs dist
 figure(3)
 
-scatter(distance,velo)
+scatter(distance,velo2)
 hold on
 xlabel("Distance", "FontSize",12)
 ylabel("velocity", "FontSize",12)
