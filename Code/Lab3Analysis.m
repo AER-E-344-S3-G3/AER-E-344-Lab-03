@@ -57,7 +57,8 @@ disp("the calibration coef is 622.6634 Pa/volt");
 
 scatter(data_average,water_pasc)
 xlabel("Voltage", "FontSize",12)
-ylabel("Pressure(pascals)", "FontSize",12)
+ylabel("Pressure (Pa)", "FontSize",12)
+title("Pressure vs Voltage","FontSize",14)
 grid on
 
 %% taking in data part 2
@@ -135,8 +136,9 @@ hold on
 plot(distance,y)
 hold off
 
-xlabel("Distance", "FontSize",12)
-ylabel("Dynamic pressure", "FontSize",12)
+xlabel("Distance (cm)", "FontSize",12)
+ylabel("Dynamic pressure (Pa)", "FontSize",12)
+title("Dynamic Pressure vs Distance","FontSize",14)
 grid on
 
 
@@ -151,8 +153,9 @@ figure(3)
 
 scatter(distance,velo2)
 hold on
-xlabel("Distance", "FontSize",12)
-ylabel("velocity", "FontSize",12)
+xlabel("Distance (cm)", "FontSize",12)
+ylabel("velocity (m/s)", "FontSize",12)
+title("Velocity vs Distance","FontSize",14)
 grid on
 slope_velo = polyfit(distance,velo,12);
 y1 = polyval(slope_velo,distance);
