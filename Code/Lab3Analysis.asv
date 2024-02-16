@@ -1,44 +1,57 @@
-clear,clc,close all 
-%% Part 1 
+% AER E 344 Spring 2024 Lab 03 Analysis
+% Section 3 Group 3
+clear, clc, close all;
 
-%% Taking in data
+%% Import Data
+pressures = [0 0.51 1.04 1.56 2.02 3.16 3.59 4.10 4.66 5.12]; % [inH_20]
+voltage = zeros(length(pressures));
 
-data0 = readtable('0.txt.xlsx');
-data051 = readtable('051.txt.xlsx');
-data104 = readtable('104.txt.xlsx');
-data156 = readtable('156.txt.xlsx');
-data202 = readtable('202.txt.xlsx');
-data316 = readtable('316.txt.xlsx');
-data359 = readtable('359.txt.xlsx');
-data410 = readtable('410.txt.xlsx');
-data466 = readtable('466.txt.xlsx');
-data512 = readtable('512.txt.xlsx');
+for i = 1 : length(pressures)
+    dataFile = fopen(string(pressures(i)) + ".txt", "r");
+    dataFormat = "%*s %*s %f";
+    voltage(i) = mean(textscan(dataFile, dataFormat, "HeaderLines", 5));
+end
 
-%% pulling data I want
 
-data_0 = data0{:,3};
-data_051 = data051{:,3};
-data_104 = data104{:,3};
-data_156 = data156{:,3};
-data_202 = data202{:,3};
-data_316 = data316{:,3};
-data_359 = data359{:,3};
-data_410 = data410{:,3};
-data_466 = data466{:,3};
-data_512 = data512{:,3};
+return
 
-%% average of that data
+% %% Import data
+% data0 = readtable('0.txt.xlsx');
+% data051 = readtable('051.txt.xlsx');
+% data104 = readtable('104.txt.xlsx');
+% data156 = readtable('156.txt.xlsx');
+% data202 = readtable('202.txt.xlsx');
+% data316 = readtable('316.txt.xlsx');
+% data359 = readtable('359.txt.xlsx');
+% data410 = readtable('410.txt.xlsx');
+% data466 = readtable('466.txt.xlsx');
+% data512 = readtable('512.txt.xlsx');
 
-data_0_average = mean(data_0);
-data_051_average = mean(data_051);
-data_104_average = mean(data_104);
-data_156_average = mean(data_156);
-data_202_average = mean(data_202);
-data_316_average = mean(data_316);
-data_359_average = mean(data_359);
-data_410_average = mean(data_410);
-data_466_average = mean(data_466);
-data_512_average = mean(data_512);
+% %% pulling data I want
+% 
+% data_0 = data0{:,3};
+% data_051 = data051{:,3};
+% data_104 = data104{:,3};
+% data_156 = data156{:,3};
+% data_202 = data202{:,3};
+% data_316 = data316{:,3};
+% data_359 = data359{:,3};
+% data_410 = data410{:,3};
+% data_466 = data466{:,3};
+% data_512 = data512{:,3};
+% 
+% %% average of that data
+% 
+% data_0_average = mean(data_0);
+% data_051_average = mean(data_051);
+% data_104_average = mean(data_104);
+% data_156_average = mean(data_156);
+% data_202_average = mean(data_202);
+% data_316_average = mean(data_316);
+% data_359_average = mean(data_359);
+% data_410_average = mean(data_410);
+% data_466_average = mean(data_466);
+% data_512_average = mean(data_512);
 
 %% taking final data to plot putting in array to plot 
 
@@ -65,6 +78,7 @@ a = polyval(slope_p1,water_pasc);
 plot(water_pasc,a)
 xlim([3,6]);
 ylim([0,1650])
+legend("Raw Data","Line Of Best Fit.")
 
 %% taking in data part 2
 
@@ -137,10 +151,10 @@ y = polyval(P_pitot,distance);
 %% ploting q vs dist 
 figure(2)
 scatter(distance,pitot_press)
-legend("Raw Data")
+
 hold on 
 plot(distance,y)
-legend("Line")
+legend("Raw Data","Line Of Best Fit.")
 hold off
 
 xlabel("Distance (cm)", "FontSize",12)
@@ -163,12 +177,13 @@ hold on
 xlabel("Distance (cm)", "FontSize",12)
 ylabel("velocity (m/s)", "FontSize",12)
 title("Velocity vs Distance","FontSize",14)
+
 grid on
 slope_velo = polyfit(distance,velo,12);
 y1 = polyval(slope_velo,distance);
 
 plot(distance,y1)
-
+legend("Raw Data","Line Of Best Fit.")
 
 
 
