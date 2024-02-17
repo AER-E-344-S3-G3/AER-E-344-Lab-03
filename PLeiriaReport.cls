@@ -252,3 +252,6 @@
   breaklines=true,
   breakanywhere=true
 }
+
+% Configure siunitx
+\sisetup{per-mode=symbol}
