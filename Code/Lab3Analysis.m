@@ -42,14 +42,16 @@ end
 V_q_0 = V_q(1);
 
 %% Calculate Calibration Coefficient
-C_regress = polyfit(V - V_0, p_pa, 1);
+[C_regress, S] = polyfit(V - V_0, p_pa, 1);
 C = C_regress(1); % [Pa/V]
+R_sq = 1 - (S.normr/norm(p_pa - mean(p_pa)))^2;
 
 fprintf("Calibration Values:\n");
 fprintf("V_0 = %g V (zero pressure voltage)\n", V_0);
 fprintf("C = %g Pa/V (calibration constant)\n\n", C);
 fprintf("Setra electronic manometer calibration curve:\n");
 fprintf("\tP = %g(V - V_0) [Pa]\n\n", C);
+fprintf("R^2 = %f\n\n", R_sq);
 
 %% Calculate Dynamic Pressure and Velocity
 q_tunnel = C .* (V_q - V_q_0); % [Pa]
