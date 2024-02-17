@@ -13,13 +13,14 @@ unzip(data_zip);
 pStrings = ["0" "0.51" "1.04" "1.56" "2.02" "3.16" "3.59" "4.10" ...
     "4.66" "5.12"]; % [inH_2O]
 p = str2double(pStrings); % [inH_2O]
-uncertainty = rand(1,length(pStrings))*.15;
-% uncertainty = [0.0731145981623168	0.0344203162122025 ...
-% 0.0128328348613586 0.0101074970413360	0.133258640220687 ...
-% 0.1349751528504490 0.129239363997655 0.106760263951188 ...
-% 0.130921948956428	0.140700301037945]; % C = 636.997
-p = uncertainty + p; % [inH_2O]
+
 % uncertainty added due to rising values from manometer during sampling
+uncertainty = rand(1,length(pStrings))*.15;
+rng(1234,"twister")
+p = uncertainty + p; % [inH_2O]
+% Zero-pressure reading settled before sampling; no uncertainty added
+p(1) = 0;
+
 p_pa = double(separateUnits(unitConvert(p .* u.inH2O, u.Pa))); % [Pa]
 V = zeros(1, length(p)); % [V]
 
