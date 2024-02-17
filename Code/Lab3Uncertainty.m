@@ -15,8 +15,8 @@ pStrings = ["0" "0.51" "1.04" "1.56" "2.02" "3.16" "3.59" "4.10" ...
 p = str2double(pStrings); % [inH_2O]
 
 % uncertainty added due to rising values from manometer during sampling
-uncertainty = rand(1,length(pStrings))*.15;
 rng(1234,"twister")
+uncertainty = rand(1,length(pStrings))*.15;
 p = uncertainty + p; % [inH_2O]
 % Zero-pressure reading settled before sampling; no uncertainty added
 p(1) = 0;
