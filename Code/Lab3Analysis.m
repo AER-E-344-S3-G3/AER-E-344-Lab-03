@@ -77,7 +77,7 @@ fprintf("v = %gL^3 + %gL^2 + %gL + %g [m/s] for 1 <= L < 16\n", ...
 V_x = 0 : 0.01 : (V(end) - V_0) * 1.15;
 
 figure(1);
-h = scatter(V - V_0, p, 50, "filled");
+h = scatter(V - V_0, p, 75, "filled");
 title("Pressure vs. Voltage from Electronic Manometer");
 xlabel("V - V_0 [V]");
 ylabel("P [Pa]");
@@ -95,7 +95,7 @@ q_x_1 = L(1) : 0.01 : L(2);
 q_x_2 = L(2) : 0.01 : L(end);
 
 figure(2);
-h = scatter(L, q_tunnel, 50, "filled");
+h = scatter(L, q_tunnel, 75, "filled");
 title("Dynamic Pressure vs. Distance from the Test Chamber Wall");
 xlabel("L [cm]");
 ylabel("q [Pa]");
@@ -114,7 +114,7 @@ v_x_1 = L(1) : 0.01 : L(2);
 v_x_2 = L(2) : 0.01 : L(end);
 
 figure(3);
-h = scatter(L, v_tunnel, 50, "filled");
+h = scatter(L, v_tunnel, 75, "filled");
 title("Velocity vs. Distance from the Test Chamber Wall");
 xlabel("L [cm]");
 ylabel("v [m/s]");
