@@ -20,6 +20,7 @@
 \usepackage{datetime} % Current date for titlepage and titleback
 \usepackage{tcolorbox} % Highlighted box
 \usepackage{subcaption} % For side-by-side figures
+\usepackage{svg} % For SVG figures
 
 % Colors
 \colorlet{redreport}{red!50!black}
