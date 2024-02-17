@@ -14,6 +14,7 @@ unzip(data_zip);
 pStrings = ["0" "0.51" "1.04" "1.56" "2.02" "3.16" "3.59" "4.10" ...
     "4.66" "5.12"]; % [inH_2O]
 p = str2double(pStrings); % [inH_2O]
+p_pa = double(separateUnits(unitConvert(p .* u.inH2O, u.Pa))); % [Pa]
 V = zeros(1, length(p)); % [V]
 
 for i = 1 : length(p)
@@ -41,9 +42,8 @@ end
 V_q_0 = V_q(1);
 
 %% Calculate Calibration Coefficient
-C_regress = polyfit(V - V_0, p, 1);
-C = C_regress(1); % [inH_2O/V]
-C = double(separateUnits(unitConvert(C * u.inH2O, u.Pa))); % [Pa/V]
+C_regress = polyfit(V - V_0, p_pa, 1);
+C = C_regress(1); % [Pa/V]
 
 fprintf("Calibration Values:\n");
 fprintf("V_0 = %g V (zero pressure voltage)\n", V_0);
@@ -77,7 +77,7 @@ fprintf("v = %gL^3 + %gL^2 + %gL + %g [m/s] for 1 <= L < 16\n", ...
 V_x = 0 : 0.01 : (V(end) - V_0) * 1.15;
 
 figure(1);
-h = scatter(V - V_0, p, 75, "filled");
+h = scatter(V - V_0, p_pa, 75, "filled");
 fontname("Times New Roman");
 fontsize(12, "points");
 title("Pressure vs. Voltage from Electronic Manometer");
