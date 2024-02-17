@@ -84,7 +84,7 @@ title("Pressure vs. Voltage from Electronic Manometer");
 xlabel("V - V_0 [V]");
 ylabel("P [Pa]");
 hold on;
-plot(V_x, polyval(C_regress, V_x));
+plot(V_x, polyval(C_regress, V_x), "red");
 hold off;
 xlim([V(1) - V_0, V(end) - V_0]);
 uistack(h, "top");
