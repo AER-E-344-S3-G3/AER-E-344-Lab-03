@@ -108,7 +108,7 @@ legend("", "Line of Best Fit", "Experimental Data", ...
     "Location", "southeast");
 grid on;
 saveas(gcf, figure_dir ...
-    + "Dynamic Pressure vs. Distance from the Test Chamber Wall.svg");
+    + "Dynamic Pressure vs Distance from the Test Chamber Wall.svg");
 
 v_x_1 = L(1) : 0.01 : L(2);
 v_x_2 = L(2) : 0.01 : L(end);
@@ -127,6 +127,6 @@ legend("", "Line of Best Fit", "Experimental Data", ...
     "Location", "southeast");
 grid on;
 saveas(gcf, figure_dir ...
-    + "Velocity vs. Distance from the Test Chamber Wall.svg");
+    + "Velocity vs Distance from the Test Chamber Wall.svg");
 
 delete *.txt
