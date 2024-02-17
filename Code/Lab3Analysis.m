@@ -3,8 +3,12 @@
 clear, clc, close all;
 
 figure_dir = "../Figures/";
+data_zip = "./data.zip";
 u = symunit;
 rho_air = 1.225; % [kg/m^3]
+
+% Unzip the data file
+unzip(data_zip);
 
 %% Import Calibration Data
 pStrings = ["0" "0.51" "1.04" "1.56" "2.02" "3.16" "3.59" "4.10" ...
@@ -124,3 +128,5 @@ legend("", "Line of Best Fit", "Experimental Data", ...
 grid on;
 saveas(gcf, figure_dir ...
     + "Velocity vs. Distance from the Test Chamber Wall.svg");
+
+delete *.txt
