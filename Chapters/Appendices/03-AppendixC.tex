@@ -2,3 +2,16 @@
 \label{cp:C_error}
 
 \section{Error in the Calibration Constant}
+One possible point of error in calculating the Calibration Constant, C, involves the settling of the Mensor Manometer readings used as the standard during Part 1 of the lab. When air was released from the plenum chamber, the value on the manometer would drop before slowly increasing. Data was recorded when the rate of the increasing value slowed; however, the manometer reading continued to increase during the 10s recording period and never seemed to settle completely. Only during the zero-pressure reading was the value stable. We noticed the reading increased up to 0.15 inches of H20 during the recording periods. Assuming bias uncertainty and adding 0.15 to all of the manometer readings would not affect the value of the Calibration Constant since the relationship between the voltage and the pressure reading is linear. 
+
+Increasing the manometer readings by random values between 0 and 0.15 may provide insight into more accurate values of the Calibration Constant. This was done in \autoref{listing:uncertainty_script} using the $rand()$ function in Matlab where the Calibration Constant was estimated to be 631.937 Pa/volt. 
+\begin{equation}
+    \frac{|C_{estimated} - C|}{C} = \frac{|631.937 - 623.286|}{623.286} = 1.38\%
+\end{equation}
+The percent error between our estimated value of C with random uncertainty values and the calculated value of C using the pressure readings at the start of the recording period is small. Therefore, the increasing pressure readings during the recording period do not seem to affect the value of C greatly.
+
+Comparing our calculated value of C to the reference Calibration Constants provided in the Lab Manual shows a much larger percent error. 
+\begin{equation}
+    \frac{|C - C_{Setra1}|}{C_{Setra1}} = \frac{|623.286 - 746.52|}{746.52} = 16.53\%
+\end{equation}
+This difference in Calibration Constants could be due to the different pressure transducers provided during the lab against what was described in the lab manual. The lab transducer was made by Omega while Setra transducers were described in the manual.
