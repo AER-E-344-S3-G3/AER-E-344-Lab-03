@@ -1,22 +1,57 @@
 \chapter{Appendix A}
+\section{Calibration Data}
+
 \begin{table}[htpb]
     \caption{Averaged calibration data.}
     \label{tab:calibration_data}
     \centering
-    \begin{tabular}{ccccccc}
+    \begin{tabular}{cccc}
         \toprule
-        $p$ [\unit{}]
-        $\omega_{motor}$ [\unit{\hertz}] & $H_{ref}$ [\unit{in}] & $H_A$ [\unit{in}] & $H_E$ [\unit{in}] & $H_{total} [\unit{in}]$ & $H_{static}$ [\unit{in}] & $T_{tunnel}$ [\unit{\degreeCelsius}] \\ 
+        $p$ [\unit{inH_2O}] & $p$ [\unit{\pascal}] & $V$ [\unit{\volt}] & $V - V_0$ [\unit{\volt}] \\
         \midrule
-        \num{0} & \num{16.7} & \num{16.7} & \num{16.7} & \num{16.7} & \num{16.7} & \num{22.1} \\
-        \num{5} & \num{16.7} & \num{16.7} & \num{16.8} & \num{16.7} & \num{16.8} & \num{22.1} \\
-        \num{10} & \num{16.7} & \num{16.6} & \num{16.9} & \num{16.6} & \num{17.0} & \num{22.1} \\
-        \num{15} & \num{16.7} & \num{16.4} & \num{17.2} & \num{16.4} & \num{17.3} & \num{22.1} \\
-        \num{20} & \num{16.7} & \num{16.1} & \num{17.6} & \num{16.1} & \num{17.6} & \num{22.1} \\
-        \num{25} & \num{16.7} & \num{15.7} & \num{18.1} & \num{15.7} & \num{18.2} & \num{22.1} \\
-        \num{30} & \num{16.7} & \num{15.2} & \num{18.6} & \num{15.2} & \num{18.9} & \num{22.1} \\
-        \num{35} & \num{16.7} & \num{14.6} & \num{19.3} & \num{14.6} & \num{19.7} & \num{22.1} \\
-        \num{40} & \num{16.7} & \num{13.9} & \num{20.2} & \num{13.8} & \num{20.6} & \num{22.1} \\
+        \num{0.00} & \num{0.00} & \num{2.97} & \num{0.00} \\
+        \num{0.51} & \num{0.13} & \num{3.17} & \num{0.205} \\
+        \num{1.04} & \num{0.259} & \num{3.38} & \num{0.415} \\
+        \num{1.56} & \num{0.389} & \num{3.59} & \num{0.621} \\
+        \num{2.02} & \num{0.503} & \num{3.77} & \num{0.807} \\
+        \num{3.16} & \num{0.787} & \num{4.23} & \num{1.26} \\
+        \num{3.59} & \num{0.894} & \num{4.40} & \num{1.44} \\
+        \num{4.10} & \num{1.02} & \num{4.61} & \num{1.64} \\
+        \num{4.66} & \num{1.16} & \num{4.83} & \num{1.86} \\
+        \num{5.12} & \num{1.28} & \num{5.01} & \num{2.05} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\newpage
+
+\section{Wind Tunnel Dynamic Pressure Distribution Data}
+
+\begin{table}[htpb]
+    \caption{Averaged data from the wind tunnel dynamic pressure distribution measurements.}
+    \label{tab:wind_tunnel_data}
+    \centering
+    \begin{tabular}{ccccc}
+        \toprule
+        $L$ [\unit{\centi\meter}] & $V$ [\unit{\volt}] & $V - V_0$ [\unit{\volt}] & $q$ [\unit{\pascal}] & $v$ [\unit{\meter\per\second}] \\
+        \midrule
+        \num{0.0} & \num{3.226} & \num{0.000} & \num{0.00} & \num{0.00} \\
+        \num{1.0} & \num{3.287} & \num{0.061} & \num{38.1} & \num{7.88} \\
+        \num{2.0} & \num{3.292} & \num{0.066} & \num{41.2} & \num{8.21} \\
+        \num{3.0} & \num{3.299} & \num{0.073} & \num{45.6} & \num{8.63} \\
+        \num{4.0} & \num{3.300} & \num{0.074} & \num{46.1} & \num{8.68} \\
+        \num{5.0} & \num{3.305} & \num{0.079} & \num{49.2} & \num{8.97} \\
+        \num{6.0} & \num{3.305} & \num{0.079} & \num{49.3} & \num{8.97} \\
+        \num{7.0} & \num{3.309} & \num{0.084} & \num{52.1} & \num{9.22} \\
+        \num{8.0} & \num{3.310} & \num{0.084} & \num{52.2} & \num{9.23} \\
+        \num{9.0} & \num{3.312} & \num{0.086} & \num{53.5} & \num{9.34} \\
+        \num{10.0} & \num{3.311} & \num{0.085} & \num{53.1} & \num{9.31} \\
+        \num{11.0} & \num{3.309} & \num{0.083} & \num{51.6} & \num{9.18} \\
+        \num{12.0} & \num{3.308} & \num{0.082} & \num{51.3} & \num{9.15} \\
+        \num{13.0} & \num{3.310} & \num{0.085} & \num{52.8} & \num{9.28} \\
+        \num{14.0} & \num{3.310} & \num{0.084} & \num{52.5} & \num{9.26} \\
+        \num{15.0} & \num{3.312} & \num{0.087} & \num{53.9} & \num{9.38} \\
+        \num{16.0} & \num{3.312} & \num{0.086} & \num{53.6} & \num{9.36} \\
         \bottomrule
     \end{tabular}
 \end{table}
