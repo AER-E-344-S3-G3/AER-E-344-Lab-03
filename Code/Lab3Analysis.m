@@ -78,6 +78,8 @@ V_x = 0 : 0.01 : (V(end) - V_0) * 1.15;
 
 figure(1);
 h = scatter(V - V_0, p, 75, "filled");
+fontname("Times New Roman");
+fontsize(12, "points");
 title("Pressure vs. Voltage from Electronic Manometer");
 xlabel("V - V_0 [V]");
 ylabel("P [Pa]");
@@ -96,6 +98,8 @@ q_x_2 = L(2) : 0.01 : L(end);
 
 figure(2);
 h = scatter(L, q_tunnel, 75, "filled");
+fontname("Times New Roman");
+fontsize(12, "points");
 title("Dynamic Pressure vs. Distance from the Test Chamber Wall");
 xlabel("L [cm]");
 ylabel("q [Pa]");
@@ -115,6 +119,8 @@ v_x_2 = L(2) : 0.01 : L(end);
 
 figure(3);
 h = scatter(L, v_tunnel, 75, "filled");
+fontname("Times New Roman");
+fontsize(12, "points");
 title("Velocity vs. Distance from the Test Chamber Wall");
 xlabel("L [cm]");
 ylabel("v [m/s]");
