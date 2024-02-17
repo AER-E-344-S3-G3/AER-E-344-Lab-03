@@ -3,27 +3,52 @@
 
 \section{Calibration Data}\label{sec:calibration_data}
 
+\autoref{fig:pressure_vs_voltage} shows the relationship between pressure [\unit{\pascal}] and voltage [\unit{\volt}]—specifically the voltage reading from the Omega pressure transducer less the zero-pressure voltage. The slope of this line is the calibration coefficient, $C = \num{623.3}$. The pressure values were manually logged using the Mensor digital pressure gauge whereas the voltage readings were recorded automatically via the data acquisition software (see \autoref{sec:procedures}). The line of best for this figure is shown in \autoref{eq:pressure_vs_voltage_lobf}
 
+\begin{equation}\label{eq:pressure_vs_voltage_lobf}
+    p = 623.3(V - V_0)
+\end{equation}
 
 \begin{figure}[htpb]
     \centering
-    \includesvg[width=\linewidth]{Figures/Pressure vs Voltage from Electronic Manometer.svg}
+    \includesvg[width=0.93\linewidth]{Figures/Pressure vs Voltage from Electronic Manometer.svg}
     \caption[Plot of pressure vs. voltage measured from the electronic manometer.]{A plot of the pressure, \gls{p}, vs. the voltage measured from the electronic manometer, \gls{V}.}
     \label{fig:pressure_vs_voltage}
 \end{figure}
 
+\newpage
+
 \section{Dynamic Pressure Distribution Data}\label{sec:dynamic_pressure_data}
+
+\autoref{fig:dynamic_pressure_vs_distance} shows the dynamic pressure [\unit{\pascal}] in the test chamber as a function of the distance [\unit{\centi\meter}] the pitot tube was from the wall of the test chamber. The distance, \gls{L}, was manually adjusted for each experiment by using a graduated slider with a mounted pitot tube. The pressure values were calculated using the voltage recorded from the data acquisition software and the calibration coefficient, \gls{C}. The line of best fit is a piece-wise function, defined in \autoref{eq:dynamic_pressure_lobf}.
+
+\begin{equation} \label{eq:dynamic_pressure_lobf}
+q = \begin{cases}
+        -17.44L^2 + 55.51L & 0 \leq L < 1 \\
+        0.01316L^3 - 0.4481L^2 + 5.095L + 33.13 & 1 \leq L < 16
+    \end{cases}
+\end{equation}
 
 \begin{figure}[htpb]
     \centering
-    \includesvg[width=\linewidth]{Figures/Dynamic Pressure vs Distance from the Test Chamber Wall.svg}
+    \includesvg[width=0.9\linewidth]{Figures/Dynamic Pressure vs Distance from the Test Chamber Wall.svg}
     \caption[Plot of dynamic pressure vs. the distance from the test chamber wall.]{A plot of the dynamic pressure, \gls{q}, vs. the distance from the test chamber wall, \gls{L}.}
     \label{fig:dynamic_pressure_vs_distance}
 \end{figure}
 
+\autoref{fig:velocity_vs_distance} shows the flow velocity [\unit{\meter\per\second}] in the test chamber as a function of the distance [\unit{\centi\meter}] the pitot tube was from the wall of the test chamber. The distance, \gls{L}, was manually adjusted for each experiment by using a graduated slider with a pitot tube mounted to it (see \autoref{fig: IMG_3132.jpeg}). The velocity data was calculated using the dynamic pressure data and \autoref{eq:velocity}. The line of best fit is a piece-wise function, defined in \autoref{eq:velocity_lobf}.
+
+\begin{equation} \label{eq:velocity_lobf}
+v = \begin{cases}
+        -3.780L^2 + 11.66L & 0 \leq L < 1 \\
+        0.001297L^3 - 0.04385L^2 + 0.4923L + 7.419 & 1 \leq L < 16
+    \end{cases}
+\end{equation}
+
 \begin{figure}[htpb]
     \centering
-    \includesvg[width=\linewidth]{Figures/Velocity vs Distance from the Test Chamber Wall.svg}
+    \includesvg[width=0.9\linewidth]{Figures/Velocity vs Distance from the Test Chamber Wall.svg}
     \caption[Plot of velocity vs. the distance from the test chamber wall.]{A plot of the velocity, \gls{v}, vs the distance from the test chamber wall, \gls{L}.}
     \label{fig:velocity_vs_distance}
+    \vspace*{5.5in}
 \end{figure}
