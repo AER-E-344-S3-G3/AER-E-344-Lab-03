@@ -12,6 +12,7 @@
 \usepackage{graphicx} % Required for including images
 \usepackage{amsmath} % Mathematical expressions
 \usepackage{amssymb} % Mathematical symbols
+\usepackage{siunitx} % SI units and quantities
 \usepackage[dvipsnames]{xcolor} % Using colors within the document
 \usepackage{tocbibind} % Add list of figures and tables of contents
 \usepackage{blindtext} % Generate dummy text
@@ -20,7 +21,7 @@
 \usepackage{datetime} % Current date for titlepage and titleback
 \usepackage{tcolorbox} % Highlighted box
 \usepackage{subcaption} % For side-by-side figures
-\usepackage{svg} % For SVG figures
+\usepackage[inkscapelatex=false]{svg} % For SVG figures
 
 % Colors
 \colorlet{redreport}{red!50!black}
