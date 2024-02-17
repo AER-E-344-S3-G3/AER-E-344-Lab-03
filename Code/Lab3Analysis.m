@@ -39,7 +39,7 @@ for i = 1 : length(L)
     fclose(dataFile);
 end
 
-V_q_0 = V_q(1);
+V_q_0 = V_0;
 
 %% Calculate Calibration Coefficient
 [C_regress, S] = polyfit(V - V_0, p_pa, 1);
