@@ -1,3 +1,18 @@
 \chapter{Introduction}
 \label{cp:introduction}
-The first part of this lab was to calibrate a pressure sensor and use the data to quantify uncertainty of measurements collected. This part is done using a plenum chamber to control pressure and a Mensor manometer to act as the standard for the pressure sensor. The second part of the lab used the calibrated pressure sensor data to create the q-map (The dynamic pressure distribution) inside the test section of the wind tunnel. A pitot tube is placed at different points in the test section at a constant wind tunnel motor frequency to measure the dynamic pressure from the edge to center of the section.
+
+The Omega pressure transducer is a tool used to measure the difference in pressure between its main port and its secondary port. It converts this difference in pressure to a voltage output which is recorded by the data acquisition software. Because of its dual port configuration, the Omega pressure transducer paired with a pitot is well-suited to measure dynamic pressure. Since, by definition,
+
+\begin{equation}\label{eq:dynamic_pressure_expr}
+    q = p_0 - p
+\end{equation}
+
+\noindent{}where \gls{q} is the dynamic pressure, \gls{p_0} is the total or stagnation pressure, and \gls{p} is the static pressure, the dynamic pressure can be recorded by connecting the stagnation pressure tube to the main port and the static pressure tube to the secondary port on the Omega pressure transducer.
+
+Without proper calibration, however, we cannot directly convert voltage to pressure. To determine the pressure as a function of the voltage output by the Omega pressure transducer, we use a reference pressure gauge and a plenum chamber to find a calibration constant \gls{K}.
+
+Once we collected the calibration data to find \gls{K}, we connected the Omega pressure transducer to a pitot tube in the wind tunnel test chamber and recorded the dynamic pressure at distances of \qtyrange{0}{16}{\centi\meter} from the wall of the test chamber.
+
+Once all the data was collected, we used a \acrfull{matlab} script to convert the voltage readings into dynamic pressure. Then, we converted the dynamic pressure into velocity and plotted the velocity distribution of the wind tunnel test chamber.
+
+Finding the velocity distribution of a wind tunnel is useful in that it determines the useful width of the wind tunnel. Due to viscous boundary layer effects, the flow near the wall of the wind tunnel will have more turbulence and a decreased flow speed. Determining where this boundary layer begins and ends is crucial to ensure the optimal placement of models and to ensure the wind tunnel is not used to analyze objects that are too wide.

@@ -3,7 +3,7 @@
 
 \section{Apparatus}\label{sec:apparatus}
 
-In this experiment, we calibrated the Omega pressure transducer in the Iowa State University wind tunnel laboratory. \autoref{fig: IMG_3131.jpeg}.
+In this experiment, we calibrated the Omega pressure transducer in the Iowa State University wind tunnel laboratory, shown in \autoref{fig: IMG_3131.jpeg}.
 
 \begin{figure}[htpb]
     \centering
@@ -13,6 +13,9 @@ In this experiment, we calibrated the Omega pressure transducer in the Iowa Stat
 \end{figure}
 
 In \autoref{fig: IMG_3131.jpeg}, we connected the tubing to two ports on the Omega pressure transducer. The first port served as the main port, receiving the total pressure, while the second port was the reference pressure port. The Omega pressure transducer then outputted the dynamic pressure by calculating the difference between the main and reference ports.
+
+In \autoref{fig: IMG_3132.jpeg}, we used the wind tunnel, a pitot tube, and the Omega pressure transducer to find the relationship between the dynamic pressure and the distance from the wall. This enabled the determination of the flow speed in the test section as a function of the distance away from the wall.
+
 
 \begin{figure}[htpb]
     \centering
@@ -24,7 +27,7 @@ In \autoref{fig: IMG_3131.jpeg}, we connected the tubing to two ports on the Ome
 \begin{figure}[htpb]
     \centering
     \includegraphics[width=0.75\linewidth]{Figures/IMG_3129.jpeg}
-    \caption[Photograph of the setup that we used to calibrate the Setra electronic manometer]{Photograph of the setup that we used to calibrate the Setra electronic manometer}
+    \caption[Photograph of the setup that we used to calibrate Omega pressure transducer]{Photograph of the setup that we used to calibrate Omega pressure transducer}
     \label{fig: IMG_3129.jpeg}
 \end{figure}
 
@@ -35,33 +38,25 @@ In \autoref{fig: IMG_3131.jpeg}, we connected the tubing to two ports on the Ome
     \label{fig: IMG_3132.jpeg}
 \end{figure}
 
-
-
-\newpage
-
 \section{Procedures}\label{sec:procedures}
 
 \subsection{Electronic Manometer Calibration}\label{sec:calibration}
 
-\underline{Apparatus:} Tubes are connected from the Mensor Digital Pressure Gauge to the plenum chamber and from the Setra electronic manometer to the plenum chamber. The pump is connected to the valve on the plenum chamber. \\
-\underline{Procedure:} 
 \begin{enumerate}
-    \item Measure the voltage with 0 pressure in the chamber. 
-    \item Pressurize close to 5 in H20 and record the voltage. 
-    \item Open the chamber valve and release about 0.5 in H20 of pressure.  
+    \item Measure the voltage with \qty{0}{inH_2O} of pressure in the chamber. 
+    \item Pressurize close to \qty{5}{inH_2O} and record the voltage. 
+    \item Open the chamber valve and release about \qty{0.5}{inH_2O} of pressure.  
     \item Wait for the pressure to stabilize and record the voltage.  
-    \item Repeat steps 3-4 until the pressure is 0. Take at least 10 data points. If you reach 0 pressure before you have 10 data points, re-pressurize to 5 inH20 and repeat the process until you have acquired enough data.
+    \item Repeat Steps 3–4 until the pressure is \qty{0}{inH_2O}. Take at least \num{10} data points. If you reach \qty{0}{inH_2O} pressure before you have \num{10} data points, re-pressurize to \qty{5}{inH_2O} and repeat the process until you have acquired enough data.
 \end{enumerate}
 
 \subsection{Wind Tunnel Dynamic Pressure Distribution Mapping}\label{subsec:dynamic_pressure_mapping}
 
-\underline{Apparatus:} The pitot tube is connected to the Setra electronic manometer. The total pressure tube of the test section is connected to the main port on the electronic manometer and the static pressure tube is connected to the reference port of the manometer. \\
-\underline{Procedure:}
 \begin{enumerate}
-    \item Set the wind tunnel to 10 m/s. 
+    \item Set the wind tunnel to \qty{15}{\hertz}
     \item Start the pitot tube at the wall and sample the voltage from the electronic manometer. Save the file. 
-    \item Move the pitot tube in from the wall 1 cm. and sample the voltage from the electronic manometer. Save the file.  
-    \item Repeat for step 3 for 15 locations, until the pitot tube should be in the middle of the test section.
+    \item Move the pitot tube in from the wall \qty{1}{\centi\meter}. and sample the voltage from the electronic manometer. Save the file.  
+    \item Repeat for Step 3 for \num{15} locations, until the pitot tube should be in the middle of the test section.
 \end{enumerate}
 
 \section{Derivations and Calculations}
